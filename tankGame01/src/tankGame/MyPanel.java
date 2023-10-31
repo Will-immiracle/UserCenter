@@ -1,4 +1,4 @@
-package main.chapter16.com.zhangzan.tankwar;
+package tankGame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     Image image1;
     Image image2;
     Image image3;
-    private Hero hero = null;
+    private main.chapter16.com.zhangzan.tankwar.Hero hero = null;
     private Vector<Enemy> enemyVector = null;
     private int enemySize;
 

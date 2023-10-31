@@ -1,4 +1,4 @@
-package main.chapter16.com.zhangzan.tankwar;
+package tankGame;
 
 public class Bomb {
     int x,y;

@@ -1,4 +1,4 @@
-package main.chapter16.com.zhangzan.tankwar;
+package tankGame;
 
 import javax.swing.*;
 import java.io.IOException;
