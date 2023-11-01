@@ -5,7 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -14,9 +16,11 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     Image image1;
     Image image2;
     Image image3;
-    private main.chapter16.com.zhangzan.tankwar.Hero hero = null;
+    private Hero hero = null;
     private Vector<Enemy> enemyVector = null;
     private int enemySize;
+    private int enenmyCount = 0;
+    private  Tank imageTank = new Enemy(1020,100);
 
     public MyPanel() throws IOException {
         hero = new Hero(100, 100);
@@ -36,7 +40,17 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        //设置击杀面板
+        g.setColor(Color.white);
+        g.fillRect(1000, 0, 300, 800);
+        //填充击杀面板
+        g.setFont(new Font("宋体",Font.BOLD,30));
+        g.setColor(Color.black);
+        g.drawString("击毁坦克数量 :",1020,30);
+        g.drawString(enenmyCount+"",1150,150);
+        //画坦克移动区域
         g.fillRect(0, 0, 1000, 800);
+        drawTank(imageTank,g);
         if (hero.isLive) {
             drawTank(hero, g);
         }
@@ -271,6 +285,14 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
     public void keyReleased(KeyEvent e) {
 
     }
+    public void save() throws IOException {
+        BufferedWriter bufferedWriter;
+        String filePath = "/Users/zhangzan/Github/Git01/savedfile.txt";
+        bufferedWriter = new BufferedWriter(new FileWriter(filePath,true));
+        bufferedWriter.write(enenmyCount);
+        bufferedWriter.newLine();
+        bufferedWriter.close();
+    }
 
     @Override
     public void run() {
@@ -311,6 +333,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         shot.isLive = false;
                         tank.isLive = false;
                         bombs.add(new Bomb(tank.getX(), tank.getY()));
+                        enenmyCount ++;
                         break;
                     }
                     break;
@@ -321,6 +344,7 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
                         shot.isLive = false;
                         tank.isLive = false;
                         bombs.add(new Bomb(tank.getX(), tank.getY()));
+                        enenmyCount ++;
                         break;
                     }
                     break;
