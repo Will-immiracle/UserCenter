@@ -15,9 +15,9 @@ public interface UserService extends IService<User> {
 
     Result userLogin(User user);
 
-    Result deleteUser(Long id);
+    Result deleteUser(String userAccount);
 
-    Result findUserById(Long id);
+    Result findUserById(String userAccount);
 
     Result updateUser(User user);
 }

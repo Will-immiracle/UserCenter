@@ -19,6 +19,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     ManageProtectedInterceptor manageProtectedInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(manageProtectedInterceptor).addPathPatterns("user/manage/**");
+        registry.addInterceptor(manageProtectedInterceptor).addPathPatterns("/user/manage/**");
     }
 }

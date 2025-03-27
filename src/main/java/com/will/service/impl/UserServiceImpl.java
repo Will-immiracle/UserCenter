@@ -103,8 +103,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     * 2.
     * */
     @Override
-    public Result deleteUser(Long id) {
-        userMapper.deleteById(id);
+    public Result deleteUser(String userAccount) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserAccount,userAccount);
+        int count = userMapper.delete(queryWrapper);
+        if(count == 0){
+            return Result.build(null, ResultCodeEnum.DATABASE_ERROR);
+        }
         return Result.ok(null);
     }
     /*
@@ -112,8 +117,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     * */
 
     @Override
-    public Result findUserById(Long id) {
-        User user = userMapper.selectById(id);
+    public Result findUserById(String userAccount) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserAccount,userAccount);
+        User user = userMapper.selectOne(queryWrapper);
+        if(user==null){
+            return Result.build(null, ResultCodeEnum.DATABASE_ERROR);
+        }
         return Result.ok(user);
     }
 

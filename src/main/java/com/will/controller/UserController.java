@@ -39,8 +39,8 @@ public class UserController {
     * 注：鉴定权限！(token验证拦截器)
     * */
     @GetMapping("manage/delete")
-    public Result deleteUser(@RequestParam Long id){
-        Result result = userService.deleteUser(id);
+    public Result deleteUser(@RequestParam String userAccount){
+        Result result = userService.deleteUser(userAccount);
         return result;
     }
     /*
@@ -48,8 +48,8 @@ public class UserController {
     * 鉴定权限！
     * */
     @GetMapping("manage/search")
-    public Result findUser(@RequestParam Long id){
-        Result result = userService.findUserById(id);
+    public Result findUser(@RequestParam String userAccount){
+        Result result = userService.findUserById(userAccount);
         return result;
     }
     /*

@@ -25,8 +25,7 @@ public class ManageProtectedInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
-        boolean expiration = jwtHelper.isExpiration(token);
-        if(!expiration){
+        if(!jwtHelper.isExpiration(token)){
             return true;
         }
         Result result = new Result<User>().build(null, ResultCodeEnum.NOTLOGIN);
