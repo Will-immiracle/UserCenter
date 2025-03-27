@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.will.mapper.UserMapper;
 import com.will.pojo.User;
 import com.will.service.UserService;
+import com.will.utils.JwtHelper;
 import com.will.utils.MD5Util;
 import com.will.utils.Result;
 import com.will.utils.ResultCodeEnum;
@@ -25,6 +26,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    JwtHelper jwtHelper;
 
     /*
     * 用户注册
@@ -72,6 +75,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     * 1.密码转化为暗文
     * 2.验证
     * 3.返回token
+    * 4.信息脱敏（map）(目前只返回token，不需要脱敏)
+    *
+    * 注：还未测试逻辑删除
     * */
 
     @Override
@@ -86,7 +92,39 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (!encrypt.equals(query.getUserPassword())){
             return Result.build(null, ResultCodeEnum.PASSWORD_ERROR);
         }
+        String token = jwtHelper.createToken(query.getId());
+        return Result.ok(token);
+    }
+
+    /*
+    * 用户注销
+    *
+    * 1.
+    * 2.
+    * */
+    @Override
+    public Result deleteUser(Long id) {
+        userMapper.deleteById(id);
         return Result.ok(null);
+    }
+    /*
+    * 用户查询
+    * */
+
+    @Override
+    public Result findUserById(Long id) {
+        User user = userMapper.selectById(id);
+        return Result.ok(user);
+    }
+
+    /*
+    * 信息更新
+    *
+    *
+    * */
+    @Override
+    public Result updateUser(User user) {
+        return null;
     }
 }
 
