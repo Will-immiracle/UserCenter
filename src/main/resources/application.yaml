@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: zan384380
+      url: jdbc:mysql://localhost:3306/UserCenter
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: isDeleted
+      id-type: assign_id
