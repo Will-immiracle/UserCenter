@@ -26,5 +26,10 @@ public class UserController {
         Result result = userService.userRegister(user);
         return result;
     }
+    @PostMapping("login")
+    public Result login(@RequestBody User user){
+        Result result = userService.userLogin(user);
+        return result;
+    }
 
 }

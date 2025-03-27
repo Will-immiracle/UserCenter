@@ -12,4 +12,6 @@ import com.will.utils.Result;
 public interface UserService extends IService<User> {
 
     Result userRegister(User user);
+
+    Result userLogin(User user);
 }

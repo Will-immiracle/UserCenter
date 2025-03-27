@@ -17,3 +17,8 @@ mybatis-plus:
     db-config:
       logic-delete-field: isDeleted
       id-type: assign_id
+
+jwt:
+  token:
+    tokenExpiration: 1200000
+    tokenSignKey: userCenter

@@ -66,6 +66,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         return Result.ok(null);
     }
+    /*
+    * 用户登录
+    *
+    * 1.密码转化为暗文
+    * 2.验证
+    * 3.返回token
+    * */
+
+    @Override
+    public Result userLogin(User user) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUserAccount,user.getUserAccount());
+        User query = userMapper.selectOne(queryWrapper);
+        if(query == null){
+            return Result.build(null, ResultCodeEnum.USERNAME_ERROR);
+        }
+        String encrypt = MD5Util.encrypt(user.getUserPassword());
+        if (!encrypt.equals(query.getUserPassword())){
+            return Result.build(null, ResultCodeEnum.PASSWORD_ERROR);
+        }
+        return Result.ok(null);
+    }
 }
 
 
